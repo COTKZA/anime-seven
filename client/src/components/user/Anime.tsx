@@ -2,6 +2,7 @@ import { NavLink } from "react-router"
 import Facebook from "./Facebook"
 import Category from "./Category"
 import Popular from "./Popular";
+import Pagination from "../layouts/user/Pagination";
 
 const Anime = () => {
 
@@ -13,7 +14,7 @@ const Anime = () => {
 
     return (
         <>
-            <div className="flex lg:flex-row flex-col gap-8 px-3.5 lg:px-0">
+            <div className="flex xl:flex-row flex-col gap-8 px-3.5 lg:px-0">
                 <div className="shadow-xl/40">
                     <div className="bg-[#e64a45] rounded-t-sm border">
                         <div className="flex items-center justify-between p-2.5">
@@ -35,6 +36,9 @@ const Anime = () => {
                                     <NavLink to="" className={"absolute bottom-0 left-0 w-full bg-black/60 text-xs px-1 py-1 text-white text-center hover:underline"}>{items.title}</NavLink>
                                 </div>
                             ))}
+                        </div>
+                        <div className="flex items-center justify-center mt-7">
+                            <Pagination />
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ import { NavLink } from "react-router"
 const Popular = () => {
     return (
         <>
-            <div className="shadow-xl/40 w-full lg:w-[260px]">
+            <div className="shadow-xl/40 w-full xl:w-[260px]">
                 <div className="bg-[#e64a45] rounded-t-sm border">
                     <div className="flex items-center justify-between p-2.5">
                         <h3 className="text-white text-md">อนิเมะยอดนิยม</h3>
