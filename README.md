@@ -1,3 +1,1 @@
-"# anime-sugoi" 
-"# anime-sugoi" 
-"# anime-seven" 
+"# anime-senven" 
