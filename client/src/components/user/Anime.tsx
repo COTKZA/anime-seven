@@ -7,7 +7,7 @@ const Anime = () => {
 
     const animes = Array.from({ length: 40 }, (_, i) => ({
         id: i + 1,
-        title: `อนิเมะตัวอย่าง เรื่องที่ ${i + 1}`,
+        title: `Mizu Zokusei no Mahoutsukai จอมเวทวารี ตอนที่ ${i + 1}`,
         image: "/images/anime/test.jpg",
     }));
 
@@ -25,7 +25,13 @@ const Anime = () => {
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 justify-center">
                             {animes.map((items) => (
                                 <div key={items.id} className="bg-[#1c1e22] border border-[#0c0d0e] rounded-sm overflow-hidden p-1 relative">
-                                    <img src={items.image} loading="lazy" className="sm:w-[140px] md:w-full sm:h-[196px] md:h-[255px]" alt={items.title} />
+                                    <div className="relative">
+                                        <img src={items.image} loading="lazy" className="sm:w-[140px] md:w-full sm:h-[196px] md:h-[255px]" alt={items.title} />
+
+                                        <span className="absolute top-0 right-0 text-[10px] font-bold text-white bg-[#ee5f5b] border border-white rounded-sm px-2 py-0 shadow-md">
+                                            ยังไม่จบ
+                                        </span>
+                                    </div>
                                     <NavLink to="" className={"absolute bottom-0 left-0 w-full bg-black/60 text-xs px-1 py-1 text-white text-center hover:underline"}>{items.title}</NavLink>
                                 </div>
                             ))}
