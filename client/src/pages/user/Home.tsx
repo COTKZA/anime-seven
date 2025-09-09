@@ -11,7 +11,6 @@ const Home = () => {
                 <Banner />
                 <Anime />
             </UserContainer>
-          
         </>
     )
 }

@@ -6,7 +6,7 @@ const Navbar = () => {
    return (
       <nav className="fixed top-0 left-0 w-full h-[50px] bg-gradient-to-b from-[#484B52] via-[#3F4248] to-[#36393E] border border-gray-800 shadow-xl/30 z-50">
          <div className="max-w-[1140px] w-full mx-auto  flex justify-between items-center h-full px-4">
-            <NavLink to="" className={"text-lg text-[#C8C8C8] hover:text-white"}>หน้าแรก</NavLink>
+            <NavLink to="/" className={"text-lg text-[#C8C8C8] hover:text-white"}>หน้าแรก</NavLink>
 
             <div className="block md:hidden">
                <div className="border border-[#232427] rounded-sm px-2.5 py-1.5">
