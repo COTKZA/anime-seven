@@ -7,6 +7,8 @@ import Episodes from "../pages/user/Episodes";
 import PlayVideo from "../pages/user/PlayVideo";
 
 import Login from "../pages/admin/auth/Login";
+import Register from "../pages/admin/auth/Register";
+
 import Dashboard from "../pages/admin/Dashboard";
 import Accounts from "../pages/admin/Accounts";
 import Categorys from "../pages/admin/Categorys";
@@ -35,6 +37,10 @@ const routers = createBrowserRouter([
     {
         path: '/admin/login',
         element: <Login />
+    },
+    {
+        path: '/admin/register',
+        element: <Register />
     },
     {
         path: '/admin/dashboard',
