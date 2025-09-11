@@ -4,7 +4,6 @@ import Cards from "../../components/admin/Cards"
 const Dashboard = () => {
   return (
     <AdminContainer>
-
       <Cards />
     </AdminContainer>
   )

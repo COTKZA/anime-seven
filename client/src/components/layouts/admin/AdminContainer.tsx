@@ -10,7 +10,7 @@ const AdminContainer = ({ children }: Props) => {
         <>
             <div className="flex">
                 <Sidebar />
-                <main className="flex-1 h-screen p-10 bg-[#1f2326] overflow-y-auto">
+                <main className="flex-1 h-screen p-3 sm:p-10 bg-[#1f2326] overflow-y-auto">
                     {children}
                 </main>
             </div>
