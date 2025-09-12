@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 05, 2025 at 11:33 PM
+-- Generation Time: Sep 11, 2025 at 04:33 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -31,6 +31,20 @@ CREATE TABLE `categories` (
   `id` int NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `episodes`
+--
+
+CREATE TABLE `episodes` (
+  `id` int NOT NULL,
+  `story_id` int DEFAULT NULL,
+  `episode_number` int DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -101,6 +115,13 @@ ALTER TABLE `categories`
   ADD UNIQUE KEY `name` (`name`);
 
 --
+-- Indexes for table `episodes`
+--
+ALTER TABLE `episodes`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `story_id` (`story_id`);
+
+--
 -- Indexes for table `stories`
 --
 ALTER TABLE `stories`
@@ -127,7 +148,9 @@ ALTER TABLE `tags`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`) USING BTREE,
+  ADD UNIQUE KEY `username` (`username`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -137,6 +160,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `episodes`
+--
+ALTER TABLE `episodes`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -172,7 +201,8 @@ ALTER TABLE `users`
 --
 ALTER TABLE `stories`
   ADD CONSTRAINT `stories_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `stories_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `stories_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `stories_ibfk_3` FOREIGN KEY (`id`) REFERENCES `episodes` (`story_id`);
 
 --
 -- Constraints for table `story_tags`
