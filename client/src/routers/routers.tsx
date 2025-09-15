@@ -12,6 +12,9 @@ import Register from "../pages/admin/auth/Register";
 import Dashboard from "../pages/admin/Dashboard";
 import Accounts from "../pages/admin/Accounts";
 import Categorys from "../pages/admin/Categorys";
+import Add_Categorys from "../pages/admin/categorys/Add_Categorys";
+import Edit_Categorys from "../pages/admin/categorys/Edit_Categorys";
+import Delete_Categorys from "../pages/admin/categorys/Delete_Categorys";
 import Tags from "../pages/admin/Tags";
 import StoryTags from "../pages/admin/StoryTags";
 import Storys from "../pages/admin/Storys";
@@ -53,6 +56,18 @@ const routers = createBrowserRouter([
     {
         path: '/admin/categorys',
         element: <Categorys />
+    },
+    {
+        path: '/admin/categorys/add',
+        element: <Add_Categorys />
+    },
+    {
+        path: '/admin/categorys/edit/:id',
+        element: <Edit_Categorys />
+    },
+    {
+        path: '/admin/categorys/delete/:id',
+        element: <Delete_Categorys />
     },
     {
         path: '/admin/tags',

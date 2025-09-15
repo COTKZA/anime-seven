@@ -1,5 +1,4 @@
-export interface register {
-    username: String,
-    email: String,
-    password_hash: String,
+export interface categorys {
+    id: number,
+    name: string,
 }

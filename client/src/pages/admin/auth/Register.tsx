@@ -33,8 +33,8 @@ const Register = () => {
       );
 
       navigate("/admin/login");
-    } catch (err: any) {
-      toastError(err.response?.data?.error || "An error occurred.");
+    } catch (error: any) {
+      toastError(error.response?.data?.error || "An error occurred.");
     } finally {
       setLoading(false);
     }

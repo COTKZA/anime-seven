@@ -3,15 +3,58 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import Pagination from "../../components/layouts/admin/Pagination";
+import { NavLink, useLocation } from "react-router";
+import { useEffect, useState } from "react";
+import { toastError, toastSuccess } from "../../utils/toast";
+import { ToastContainer } from "react-toastify";
+import axios from "axios";
+import type { categorys } from "../../types/interface";
+import Loading from "../../components/layouts/admin/Loading";
 
 const Categorys = () => {
+    const location = useLocation()
+
+    const [categories, setCategories] = useState<categorys[]>([])
+    const [page, setPage] = useState<number>(1)
+    const [totalPage, setTotalPage] = useState<number>(1)
+    const [loading, setLoading] = useState<boolean>(false)
+    const [search, setSearch] = useState<string>("")
+
+    useEffect(() => {
+        if (location.state?.success) {
+            toastSuccess(location.state.success)
+            window.history.replaceState({}, document.title)
+        }
+    }, [location.state])
+
+    const Categories = async (pageNum: number = 1) => {
+        try {
+            setLoading(true)
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/categorys`, {
+                params: { page: pageNum, limit: 10, search: search },
+            })
+
+            setCategories(res.data.data)
+            setPage(res.data.page)
+            setTotalPage(res.data.total_page)
+        } catch (error: any) {
+            toastError(error.response?.data?.error || "Failed to fetch data")
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    useEffect(() => {
+        Categories(page);
+    }, [page, search])
+
     return (
         <AdminContainer>
             <div className="bg-[#e64a45] rounded-t-sm p-3">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
                     <h1 className="text-white font-extrabold text-2xl flex items-center gap-2"><BiSolidCategoryAlt />Categorys</h1>
-                    <input type="search" className="w-full md:max-w-md bg-white rounded-lg placeholder:text-md placeholder:text-gray-500 p-2 focus:ring-2 focus:ring-gray-300 focus:outline-none" placeholder="search" />
-                    <button className="w-full md:w-auto bg-green-500 px-3 py-2  sm:px-4 sm:py-2 rounded-md text-white hover:bg-green-600">Add</button>
+                    <input type="search" value={search} onChange={(event) => setSearch(event.target.value)} className="w-full md:max-w-md bg-white rounded-lg placeholder:text-md placeholder:text-gray-500 p-2 focus:ring-2 focus:ring-gray-300 focus:outline-none" placeholder="search" />
+                    <NavLink to={'/admin/categorys/add'}><button className="w-full md:w-auto bg-green-500 px-3 py-2  sm:px-4 sm:py-2 rounded-md text-white hover:bg-green-600">Add</button></NavLink>
                 </div>
             </div>
             <div className="bg-[#2e3338] p-2  rounded-b-sm">
@@ -25,23 +68,44 @@ const Categorys = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="border-b bg-[#1f2326]/40 border-gray-700">
-                                <th scope="row" className="px-6 py-4 font-medium text-white whitespace-nowrap">1</th>
-                                <td className="px-6 py-4 text-white">ซับไทย</td>
-                                <td>
-                                    <div className="flex items-center gap-2">
-                                        <button className="bg-yellow-500 hover:bg-yellow-700 p-2 rounded-md"><FaEdit className="text-lg text-white" /></button>
-                                        <button className="bg-red-500 hover:bg-red-700 p-2 rounded-md"><MdDelete className="text-lg text-white" /></button>
-                                    </div>
-                                </td>
-                            </tr>
+                            {loading ? (
+                                <tr>
+                                    <td colSpan={3}>
+                                        <div className="flex items-center justify-center">
+                                            <Loading />
+                                        </div>
+                                    </td>
+                                </tr>
+                            ) : categories.length > 0 ? (
+                                categories.map((items) => (
+                                    <tr key={items.id} className="border-b bg-[#1f2326]/40 border-gray-700">
+                                        <th scope="row" className="px-6 py-4 font-medium text-white whitespace-nowrap">{items.id}</th>
+                                        <td className="px-6 py-4 text-white">{items.name}</td>
+                                        <td>
+                                            <div className="flex items-center gap-2">
+                                                <NavLink to={`/admin/categorys/edit/${items.id}`}><button className="bg-yellow-500 hover:bg-yellow-700 p-2 rounded-md"><FaEdit className="text-lg text-white" /></button></NavLink>
+                                                <NavLink to={`/admin/categorys/delete/${items.id}`}><button className="bg-red-500 hover:bg-red-700 p-2 rounded-md"><MdDelete className="text-lg text-white" /></button></NavLink>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={3} className="text-white">
+                                        <div className="flex items-center justify-center">
+                                            <p className="p-4">ไม่มีข้อมูล</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
                 <div className="mt-7">
-                    <Pagination />
+                    <Pagination currentPage={page} totalPages={totalPage} onPageChange={(page) => setPage(page)} />
                 </div>
             </div>
+            <ToastContainer />
         </AdminContainer>
     )
 }

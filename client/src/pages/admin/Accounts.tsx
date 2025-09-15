@@ -45,7 +45,7 @@ const Accounts = () => {
                     </table>
                 </div>
                 <div className="mt-7">
-                    <Pagination />
+                    {/* <Pagination /> */}
                 </div>
             </div>
         </AdminContainer>
