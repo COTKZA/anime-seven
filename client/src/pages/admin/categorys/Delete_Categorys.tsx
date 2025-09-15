@@ -49,7 +49,7 @@ const Delete_Categorys = () => {
               <input type="text"
                 placeholder="ชื่อ"
                 value={name}
-                className="w-full p-2 mt-1 bg-gray-100 border border-gray-100 rounded-lg" />
+                className="w-full p-2 mt-1 bg-gray-100 border border-gray-100 rounded-lg" readOnly />
             </div>
             <div className="flex justify-end items-center mt-5 gap-3">
               <NavLink to={'/admin/categorys'}><button className="px-5 py-2 border border-gray-300 hover:bg-gray-500 rounded-xl text-white">ยกเลิก</button></NavLink>

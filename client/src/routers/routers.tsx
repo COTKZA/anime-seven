@@ -11,11 +11,15 @@ import Register from "../pages/admin/auth/Register";
 
 import Dashboard from "../pages/admin/Dashboard";
 import Accounts from "../pages/admin/Accounts";
+
 import Categorys from "../pages/admin/Categorys";
 import Add_Categorys from "../pages/admin/categorys/Add_Categorys";
 import Edit_Categorys from "../pages/admin/categorys/Edit_Categorys";
 import Delete_Categorys from "../pages/admin/categorys/Delete_Categorys";
+
 import Tags from "../pages/admin/Tags";
+import Add_Tags from "../pages/admin/tags/Add_Tags";
+
 import StoryTags from "../pages/admin/StoryTags";
 import Storys from "../pages/admin/Storys";
 import StoryEpisode from "../pages/admin/StoryEpisode";
@@ -72,6 +76,10 @@ const routers = createBrowserRouter([
     {
         path: '/admin/tags',
         element: <Tags />
+    },
+    {
+        path: '/admin/tags/add',
+        element: <Add_Tags />
     },
     {
         path: '/admin/storytags',

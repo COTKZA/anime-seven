@@ -70,10 +70,8 @@ const Categorys = () => {
                         <tbody>
                             {loading ? (
                                 <tr>
-                                    <td colSpan={3}>
-                                        <div className="flex items-center justify-center">
+                                    <td colSpan={3}>                      
                                             <Loading />
-                                        </div>
                                     </td>
                                 </tr>
                             ) : categories.length > 0 ? (
@@ -93,7 +91,7 @@ const Categorys = () => {
                                 <tr>
                                     <td colSpan={3} className="text-white">
                                         <div className="flex items-center justify-center">
-                                            <p className="p-4">ไม่มีข้อมูล</p>
+                                                <p className="p-4">ไม่มีข้อมูล</p>
                                         </div>
                                     </td>
                                 </tr>
