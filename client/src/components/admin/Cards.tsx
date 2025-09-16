@@ -14,6 +14,8 @@ const Cards = () => {
         user: 0,
         category: 0,
         tags: 0,
+        story: 0,
+        episodes: 0,
     })
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -44,14 +46,14 @@ const Cards = () => {
                         <div className="relative bg-[#282f3c] w-full p-4 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 transform transition decoration-3">
                             <div className="absolute left-0 top-0 h-full w-2 bg-red-500 rounded-l-2xl"></div>
                             <div className="text-4xl text-red-500 mb-2"><RiMovie2Fill /></div>
-                            <p className="text-white text-lg">6</p>
+                            <p className="text-white text-lg">{status.story}</p>
                             <p className="text-gray-400 text-sm">เรื่อง</p>
                         </div>
 
                         <div className="relative bg-[#282f3c] w-full p-4 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 transform transition decoration-3">
                             <div className="absolute left-0 top-0 h-full w-2 bg-green-500 rounded-l-2xl"></div>
                             <div className="text-4xl text-green-500 mb-2"><ImFilm /></div>
-                            <p className="text-white text-lg">6</p>
+                            <p className="text-white text-lg">{status.episodes}</p>
                             <p className="text-gray-400 text-sm">ตอน</p>
                         </div>
 
