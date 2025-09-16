@@ -3,7 +3,6 @@ const Category = require("../../models/categories");
 const Tag = require("../../models/tags");
 const Story = require("../../models/stories");
 const Episodes = require("../../models/episodes");
-const StoryTag = require("../../models/story_tags")
 
 exports.index = async (req, res) => {
   try {
