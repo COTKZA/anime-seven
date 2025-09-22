@@ -6,7 +6,7 @@ const Dashboard = () => {
     <AdminContainer>
       <Cards />
     </AdminContainer>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

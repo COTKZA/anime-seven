@@ -1,43 +1,54 @@
+import { useEffect, useState, type FormEvent } from "react"
 import AdminContainer from "../../../components/layouts/admin/AdminContainer"
-import { NavLink, useNavigate } from "react-router"
+import { NavLink, useNavigate, useParams } from "react-router"
 import axios from "axios"
 import { toastError } from "../../../utils/toast"
-import { ToastContainer } from "react-toastify"
-import { useState, type FormEvent } from "react"
 
-const Add_Tags = () => {
-    const [name, setName] = useState<string>("")
+const Delete_Tags = () => {
+    const { id } = useParams<{ id: string }>()
     const navigate = useNavigate()
+    const [name, setName] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
 
-    const handleTags = async (event: FormEvent) => {
-        event.preventDefault();
+    useEffect(() => {
+        const fetchIdTags = async () => {
+            try {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/tags/${id}`)
+                setName(res.data.data.name)
+            } catch (error: any) {
+                toastError(error.response?.data?.error || 'Failed to fetch tags')
+            }
+        }
+        if (id) fetchIdTags()
+    }, [id])
+
+    const handleDelete = async (event: FormEvent) => {
+        event.preventDefault()
 
         try {
             setLoading(true)
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/tags`, { name })
+            const res = await axios.delete(`${import.meta.env.VITE_API_URL}/tags/${id}`)
             navigate('/admin/tags', { state: { success: res.data.message } })
         } catch (error: any) {
-            toastError(error.response?.data?.error)
+            toastError(error. response?.data?.error)
         } finally {
             setLoading(false)
         }
     }
-    
     return (
         <AdminContainer>
             <div className="bg-[#e64a45] rounded-t-sm p-3">
-                <h1 className="text-white font-extrabold text-xl">เพิ่มแท็ก</h1>
+                <h1 className="text-white font-extrabold text-xl">ลบแท็ก</h1>
             </div>
             <div className="bg-[#2e3338] p-2 rounded-b-sm">
                 <div>
-                    <form onSubmit={handleTags}>
+                    <form onSubmit={handleDelete}>
                         <div>
                             <label htmlFor="name" className="text-white text-md">ชื่อ</label>
                             <input type="text"
                                 placeholder="ชื่อ"
                                 value={name}
-                                onChange={(event) => setName(event.target.value)}
+                                readOnly
                                 className="w-full p-2 mt-1 bg-gray-100 border border-gray-100 rounded-lg" />
                         </div>
                         <div className="flex justify-end items-center mt-5 gap-3">
@@ -47,9 +58,8 @@ const Add_Tags = () => {
                     </form>
                 </div>
             </div>
-            <ToastContainer />
         </AdminContainer>
     )
 }
 
-export default Add_Tags
+export default Delete_Tags

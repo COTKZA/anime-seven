@@ -12,7 +12,7 @@ const Delete_Categorys = () => {
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    const findIdCategory = async () => {
+    const fetchIdCategory = async () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/categorys/${id}`)
         setName(res.data.data.name)
@@ -20,13 +20,14 @@ const Delete_Categorys = () => {
         toastError(error.response?.data?.error || "Failed to fetch category")
       }
     }
-    if (id) findIdCategory()
+    if (id) fetchIdCategory()
   }, [id])
 
   const handleDelete = async (event: FormEvent) => {
     event.preventDefault()
 
     try {
+      setLoading(true)
       const res = await axios.delete(`${import.meta.env.VITE_API_URL}/categorys/${id}`)
       navigate('/admin/categorys', { state: { success: res.data.message } })
     } catch (error: any) {
@@ -39,13 +40,13 @@ const Delete_Categorys = () => {
   return (
     <AdminContainer>
       <div className="bg-[#e64a45] rounded-t-sm p-3">
-        <h1 className="text-white font-extrabold text-xl">Delete Categorys</h1>
+        <h1 className="text-white font-extrabold text-xl">ลบหมวดหมู่</h1>
       </div>
       <div className="bg-[#2e3338] p-2 rounded-b-sm">
         <div>
           <form onSubmit={handleDelete}>
             <div>
-              <label htmlFor="name" className="text-white text-md">Name</label>
+              <label htmlFor="name" className="text-white text-md">ชื่อ</label>
               <input type="text"
                 placeholder="ชื่อ"
                 value={name}

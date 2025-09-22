@@ -1,8 +1,7 @@
-import AdminContainer from "../../components/layouts/admin/AdminContainer";
-import Pagination from "../../components/layouts/admin/Pagination";
-import { ImFilm } from "react-icons/im";
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import AdminContainer from "../../components/layouts/admin/AdminContainer"
+import { ImFilm } from "react-icons/im"
+import { FaEdit } from "react-icons/fa"
+import { MdDelete } from "react-icons/md"
 
 const StoryEpisode = () => {
     return (
@@ -212,7 +211,6 @@ const StoryEpisode = () => {
 
                 </div>
                 <div className="mt-7">
-                    <Pagination />
                 </div>
             </div>
         </AdminContainer>

@@ -49,11 +49,11 @@ const Video = () => {
           <div className="bg-[#2e3338] rounded-b-sm p-4 border">
             <h2 className="text-[#C8C8C8] text-3xl text-center mb-3">เรื่อง Isekai Mokushiroku Mynoghra ไมนอกรา บันทึกวันอวสาน(ต่าง)โลก ตอนที่ 1 ซับไทย</h2>
 
-            <div className="flex items-center justify-center mb-3">
+            {/* <div className="flex items-center justify-center mb-3">
               <div className='rounded-sm bg-[#202020] xl:w-[728px] xl:h-[200px] p-1'>
                 <img src="https://www.animeseven.com/pic/webp/juad888.webp" className="w-full h-full " alt="" />
               </div>
-            </div>
+            </div> */}
 
             <div className="mb-3">
               <video id="player" poster="/images/poster.jpeg" playsInline controls>
@@ -61,11 +61,11 @@ const Video = () => {
               </video>
             </div>
 
-            <div className="flex items-center justify-center mb-3">
+            {/* <div className="flex items-center justify-center mb-3">
               <div className='rounded-sm bg-[#202020] xl:w-[728px] xl:h-[200px] p-1'>
                 <img src="https://www.animeseven.com/pic/webp/lotto432.webp" className="w-full h-full" alt="" />
               </div>
-            </div>
+            </div> */}
 
             <div className="flex items-center justify-center">
               <button className="flex items-center justify-center bg-[#EE5F5B] hover:bg-[#eb2421] text-white text-sm gap-2 p-2 rounded-sm border border-gray-800 mb-5">หนังไม่เล่น ตัวเล่นไม่แสดง กดที่นี่<TfiReload /></button>

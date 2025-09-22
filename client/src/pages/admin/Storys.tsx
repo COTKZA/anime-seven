@@ -1,11 +1,10 @@
 import AdminContainer from "../../components/layouts/admin/AdminContainer"
-import { RiMovie2Fill } from "react-icons/ri";
-import { NavLink } from "react-router";
-import Pagination from "../../components/layouts/admin/Pagination";
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-import { FaCaretDown } from "react-icons/fa";
-import { useState } from "react";
+import { RiMovie2Fill } from "react-icons/ri"
+import { NavLink } from "react-router"
+import { FaEdit } from "react-icons/fa"
+import { MdDelete } from "react-icons/md"
+import { FaCaretDown } from "react-icons/fa"
+import { useState } from "react"
 
 const Storys = () => {
   const [dropdown, setDropdown] = useState(false)
@@ -32,7 +31,7 @@ const Storys = () => {
             </div>
           </div>
           <input type="search" className="w-full md:max-w-md bg-white rounded-lg placeholder:text-md placeholder:text-gray-500 p-2 focus:ring-2 focus:ring-gray-300 focus:outline-none" placeholder="search" />
-          <button className="w-full md:w-auto bg-green-500 px-3 py-2  sm:px-4 sm:py-2 rounded-md text-white hover:bg-green-600">Add</button>
+          <NavLink to={"/admin/storys/add"}><button className="w-full md:w-auto bg-green-500 px-3 py-2  sm:px-4 sm:py-2 rounded-md text-white hover:bg-green-600">Add</button></NavLink>
         </div>
       </div>
 
@@ -169,7 +168,7 @@ const Storys = () => {
 
         </div>
         <div className="mt-7">
-          <Pagination />
+
         </div>
       </div>
     </AdminContainer>

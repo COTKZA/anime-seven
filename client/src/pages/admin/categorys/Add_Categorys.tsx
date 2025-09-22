@@ -27,13 +27,13 @@ const Add_Categorys = () => {
     return (
         <AdminContainer>
             <div className="bg-[#e64a45] rounded-t-sm p-3">
-                <h1 className="text-white font-extrabold text-xl">Add Categorys</h1>
+                <h1 className="text-white font-extrabold text-xl">เพิ่มหมวดหมู่</h1>
             </div>
             <div className="bg-[#2e3338] p-2 rounded-b-sm">
                 <div>
                     <form onSubmit={handleCategory}>
                         <div>
-                            <label htmlFor="name" className="text-white text-md">Name</label>
+                            <label htmlFor="name" className="text-white text-md">ชื่อ</label>
                             <input type="text" 
                             placeholder="ชื่อ"
                             value={name}

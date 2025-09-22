@@ -11,7 +11,7 @@ const Register = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleRegister = async (event: FormEvent) => {
     event.preventDefault();
@@ -27,10 +27,11 @@ const Register = () => {
 
     try {
       setLoading(true);
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/register`,
-        { username, email, password_hash: password }
-      );
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {
+        username,
+        email,
+        password_hash: password,
+      });
 
       navigate("/admin/login");
     } catch (error: any) {
@@ -109,7 +110,11 @@ const Register = () => {
               />
             </div>
 
-            <button type="submit" className="bg-blue-500 w-full rounded-md p-3 text-white hover:bg-blue-600 mt-4" disabled={loading}>
+            <button
+              type="submit"
+              className="bg-blue-500 w-full rounded-md p-3 text-white hover:bg-blue-600 mt-4"
+              disabled={loading}
+            >
               สมัคร
             </button>
           </form>
