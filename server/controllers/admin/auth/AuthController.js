@@ -6,6 +6,7 @@ require("dotenv").config();
 const JWT_SECRET = process.env.JWT_SECRET;
 const COOKIE_EXPIRES = 24 * 60 * 60 * 1000;
 
+// Register a new admin user
 exports.register = async (req, res) => {
   try {
     const { username, email, password_hash } = req.body;
@@ -27,7 +28,7 @@ exports.register = async (req, res) => {
       username: username,
       email: email,
       password_hash: hashedPassword,
-      role: "user",
+      role: "admin",
     });
 
     res.status(201).json({ message: "Account registered successfully" });
@@ -36,6 +37,7 @@ exports.register = async (req, res) => {
   }
 };
 
+// Admin login
 exports.login = async (req, res) => {
   try {
     const { email, password_hash } = req.body;
@@ -84,6 +86,7 @@ exports.login = async (req, res) => {
   }
 };
 
+// Admin logout
 exports.logout = (req, res) => {
   res.cookie("token", "", {
     httpOnly: true,
@@ -92,6 +95,7 @@ exports.logout = (req, res) => {
   res.json({ message: "Logged out successfully" });
 };
 
+// Get admin profile
 exports.getProfile = async (req, res) => {
   try {
     const user = await User.findByPk(req.user.id, {

@@ -26,7 +26,7 @@ const Add_Story = () => {
                             <textarea name="description" id="description" rows={4} className="w-full p-2 mt-1 bg-gray-100 border border-gray-100 rounded-lg" placeholder="รายละเอียด"></textarea>
                         </div>
                         <div className="mb-2">
-                            <label htmlFor="description" className="text-white text-md">รายละเอียด</label>
+                            <label htmlFor="description" className="text-white text-md">หมวดหมู่</label>
                             <select name="category_id" id="category_id" className="w-full p-2 mt-1 bg-gray-100 border border-gray-100 rounded-lg">
                                 <option value="">ซับไทย</option>
                             </select>

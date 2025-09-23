@@ -1,14 +1,41 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import type { AuthContextType, AuthState, LoginCredentials } from '../types/interface';
 import axios from 'axios';
 
-const AuthContext = createContext<AuthContextType | null>(null);
 
-const API_URL = `${import.meta.env.VITE_API_URL}`;
+interface User {
+    id: number;
+    username: string;
+    email: string;
+    role: string;
+}
+
+
+interface AuthState {
+    isAuthenticated: boolean;
+    user: User | null;
+    loading: boolean;
+    error: string | null;
+}
+
+interface LoginCredentials {
+    email: string;
+    password_hash: string;
+}
+
+
+interface AuthContextType extends AuthState {
+    login: (credentials: LoginCredentials) => Promise<void>;
+    logout: () => Promise<void>;
+    checkAuth: () => Promise<boolean>;
+}
 
 interface Props {
     children: ReactNode;
 }
+
+const AuthContext = createContext<AuthContextType | null>(null);
+
+const API_URL = `${import.meta.env.VITE_API_URL}`;
 
 const AuthProvider = ({ children }: Props) => {
     const [state, setState] = useState<AuthState>({
@@ -95,6 +122,7 @@ const AuthProvider = ({ children }: Props) => {
             }));
         }
     };
+    
     return (
         <AuthContext.Provider
             value={{

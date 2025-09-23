@@ -53,7 +53,7 @@ const Delete_Tags = () => {
                         </div>
                         <div className="flex justify-end items-center mt-5 gap-3">
                             <NavLink to={'/admin/tags'}><button className="px-5 py-2 border border-gray-300 hover:bg-gray-500 rounded-xl text-white">ยกเลิก</button></NavLink>
-                            <button type="submit" className="px-5 py-2 bg-green-500 hover:bg-green-600 rounded-xl text-white" disabled={loading}>บันทึก</button>
+                            <button type="submit" className="px-5 py-2 bg-red-500 hover:bg-red-600 rounded-xl text-white" disabled={loading}>ลบ</button>
                         </div>
                     </form>
                 </div>

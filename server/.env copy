@@ -3,4 +3,7 @@ DB_USER = "root"
 DB_PASSWORD = "1234"
 DB_DATABASE = "anime_seven"
 
-PORT_SERVER = 3000
+PORT_SERVER = 5000
+
+NODE_ENV=development
+JWT_SECRET= 2da86f74cc81d9d92ed337bc3998b966
