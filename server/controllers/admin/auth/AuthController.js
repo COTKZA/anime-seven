@@ -4,13 +4,12 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const COOKIE_EXPIRES = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+const COOKIE_EXPIRES = 24 * 60 * 60 * 1000;
 
 exports.register = async (req, res) => {
   try {
     const { username, email, password_hash } = req.body;
 
-    // Check if user already exists
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ error: "Email already registered" });
@@ -24,41 +23,14 @@ exports.register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password_hash, 10);
 
-    const user = await User.create({
+    await User.create({
       username: username,
       email: email,
       password_hash: hashedPassword,
-      role: 'user'
+      role: "user",
     });
 
-    // Generate token after registration
-    const token = jwt.sign(
-      {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-      },
-      JWT_SECRET,
-      { expiresIn: "24h" }
-    );
-
-    // Set cookie
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: COOKIE_EXPIRES
-    });
-
-    res.status(201).json({ 
-      message: "Account registered successfully",
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        role: user.role
-      }
-    });
+    res.status(201).json({ message: "Account registered successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -99,42 +71,35 @@ exports.login = async (req, res) => {
     );
 
     // Set cookie
-    res.cookie('token', token, {
+    res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: COOKIE_EXPIRES
+      secure: process.env.NODE_ENV === "production",
+      maxAge: COOKIE_EXPIRES,
+      sameSite: 'strict'
     });
 
-    res.status(200).json({ 
-      message: "Login successful",
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        role: user.role
-      }
-    });
+    res.status(200).json({ message: "Login successful" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
 exports.logout = (req, res) => {
-  res.cookie('token', '', {
+  res.cookie("token", "", {
     httpOnly: true,
-    expires: new Date(0)
+    expires: new Date(0),
   });
-  res.json({ message: 'Logged out successfully' });
+  res.json({ message: "Logged out successfully" });
 };
 
 exports.getProfile = async (req, res) => {
   try {
     const user = await User.findByPk(req.user.id, {
-      attributes: ['id', 'username', 'email', 'role']
+      attributes: ["id", "username", "email", "role"],
     });
-    
+
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     res.json({ user });

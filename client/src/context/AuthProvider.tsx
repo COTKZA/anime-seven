@@ -27,10 +27,7 @@ const AuthProvider = ({ children }: Props) => {
         try {
             const response = await axios.get(`${API_URL}/auth/profile`, {
                 withCredentials: true,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
             });
 
             if (response.data?.user) {
@@ -56,7 +53,7 @@ const AuthProvider = ({ children }: Props) => {
     const login = async (credentials: LoginCredentials) => {
         setState(prev => ({ ...prev, loading: true }));
         try {
-            const response = await axios.post(
+            await axios.post(
                 `${API_URL}/auth/login`,
                 credentials,
                 {
@@ -65,14 +62,8 @@ const AuthProvider = ({ children }: Props) => {
                     },
                     withCredentials: true
                 }
-            );
-
-            setState({
-                isAuthenticated: true,
-                user: response.data.user,
-                loading: false,
-                error: null
-            });
+            )
+            await checkAuth();
         } catch (error: any) {
             setState(prev => ({
                 ...prev,
