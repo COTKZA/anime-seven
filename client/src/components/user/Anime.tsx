@@ -13,7 +13,7 @@ const Anime = () => {
 
   return (
     <>
-      <div className="flex xl:flex-row flex-col gap-8 px-3.5 lg:px-0">
+      <div className="flex xl:flex-row flex-col gap-8 px-3.5 lg:px-0 mt-4">
         <div className="shadow-xl/40">
           <div className="bg-[#e64a45] rounded-t-sm border">
             <div className="flex items-center justify-between p-2.5">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 11, 2025 at 04:33 PM
+-- Generation Time: Sep 23, 2025 at 12:42 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -59,9 +59,9 @@ CREATE TABLE `stories` (
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `category_id` int DEFAULT NULL,
   `user_id` int DEFAULT NULL,
-  `status` enum('ongoing','completed','hiatus') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'ongoing',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `status` enum('ongoing','completed') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'ongoing',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -95,10 +95,10 @@ CREATE TABLE `tags` (
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password_hash` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `role` enum('admin') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` enum('admin') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'admin',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -197,12 +197,17 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `episodes`
+--
+ALTER TABLE `episodes`
+  ADD CONSTRAINT `episodes_ibfk_1` FOREIGN KEY (`story_id`) REFERENCES `stories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `stories`
 --
 ALTER TABLE `stories`
   ADD CONSTRAINT `stories_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `stories_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `stories_ibfk_3` FOREIGN KEY (`id`) REFERENCES `episodes` (`story_id`);
+  ADD CONSTRAINT `stories_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `story_tags`

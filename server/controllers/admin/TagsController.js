@@ -1,6 +1,7 @@
 const Tag = require("../../models/tags");
 const { Op } = require("sequelize");
 
+// List all tags with pagination and search
 exports.index = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -30,6 +31,7 @@ exports.index = async (req, res) => {
   }
 };
 
+// Create a new tag
 exports.create_tag = async (req, res) => {
   try {
     const { name } = req.body;
@@ -48,6 +50,7 @@ exports.create_tag = async (req, res) => {
   }
 };
 
+// Get tag by ID
 exports.tagId = async (req, res) => {
   try {
     const { id } = req.params;
@@ -66,6 +69,7 @@ exports.tagId = async (req, res) => {
   }
 };
 
+// Update tag by ID
 exports.update_tags = async (req, res) => {
   try {
     const { id } = req.params;
@@ -91,6 +95,7 @@ exports.update_tags = async (req, res) => {
   }
 };
 
+// Delete tag by ID
 exports.delete_tags = async (req, res) => {
   try {
     const { id } = req.params;

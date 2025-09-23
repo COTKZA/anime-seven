@@ -4,6 +4,7 @@ const Tag = require("../../models/tags");
 const Story = require("../../models/stories");
 const Episodes = require("../../models/episodes");
 
+// Dashboard statistics
 exports.index = async (req, res) => {
   try {
     const users = await User.count();

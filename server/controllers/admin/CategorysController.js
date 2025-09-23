@@ -1,6 +1,7 @@
 const Category = require("../../models/categories");
 const { Op } = require("sequelize");
 
+// List all categories with pagination and search
 exports.index = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -30,6 +31,7 @@ exports.index = async (req, res) => {
   }
 };
 
+// Create a new category
 exports.create_category = async (req, res) => {
   try {
     const { name } = req.body;
@@ -48,6 +50,7 @@ exports.create_category = async (req, res) => {
   }
 };
 
+// Get category by ID
 exports.categoryId = async (req, res) => {
   try {
     const { id } = req.params;
@@ -66,6 +69,8 @@ exports.categoryId = async (req, res) => {
   }
 };
 
+
+// Update category by ID
 exports.update_category = async (req, res) => {
   try {
     const { id } = req.params;
@@ -91,6 +96,8 @@ exports.update_category = async (req, res) => {
   }
 };
 
+
+// Delete category by ID
 exports.delete_category = async (req, res) => {
   try {
     const { id } = req.params;

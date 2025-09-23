@@ -5,8 +5,11 @@ import { BiSolidCategoryAlt } from "react-icons/bi";
 import { FaTags } from "react-icons/fa";
 import { FaTag } from "react-icons/fa";
 import { RiMovie2Fill } from "react-icons/ri";
+import { useAuth } from "../../../context/AuthProvider";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 const Sidebar = () => {
+  const { logout } = useAuth()
   return (
     <aside className="w-64 bg-[#2e3338] shadow-lg hidden lg:block">
       <div className="p-6 flex flex-col h-full">
@@ -108,8 +111,12 @@ const Sidebar = () => {
             </span>
           </NavLink>
 
+          <div className="mt-10">
+            <button type="button" className="p-2 w-full bg-red-500 hover:bg-red-600 flex justify-center items-center gap-1 text-white rounded-md group" onClick={logout}><RiLogoutCircleLine className="text-lg group-hover:translate-x-[-5px] transform transition-transform duration-500" /> Logout</button>
+          </div>
         </nav>
       </div>
+
     </aside>
   );
 };
