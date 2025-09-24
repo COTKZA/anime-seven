@@ -10,12 +10,18 @@ const path = require("path");
 require("dotenv").config();
 const port = process.env.PORT_SERVER;
 
+const storyDir = path.join(__dirname, "public/storys");
+if (!fs.existsSync(storyDir)) {
+  fs.mkdirSync(storyDir, { recursive: true });
+}
+
+
 // CORS configuration for credentials
 const corsOptions = {
   origin: "http://localhost:5173",
-  credentials: true, 
+  credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(express.json());
@@ -29,6 +35,8 @@ fs.readdirSync(routersPath).forEach((file) => {
     app.use(route);
   }
 });
+
+app.use("/storys", express.static(storyDir));
 
 app.listen(port, async () => {
   try {

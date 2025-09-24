@@ -2,6 +2,8 @@ import AdminContainer from "../../components/layouts/admin/AdminContainer"
 import { ImFilm } from "react-icons/im"
 import { FaEdit } from "react-icons/fa"
 import { MdDelete } from "react-icons/md"
+import { NavLink } from "react-router"
+import { HiMiniSlash } from "react-icons/hi2";
 
 const StoryEpisode = () => {
     return (
@@ -25,8 +27,7 @@ const StoryEpisode = () => {
 
             <div className="bg-[#e64a45] rounded-t-sm border mt-5">
                 <div className="flex items-center justify-between p-2.5">
-                    <h3 className="text-xl text-white">Circlet Princess ศึกสาวสังเวียนไซเบอร์</h3>
-
+                    <h3 className="text-xl text-white flex items-center"><NavLink to={"/admin/storys"} className={"flex items-center hover:underline"}>Storys<HiMiniSlash /></NavLink>Circlet Princess ศึกสาวสังเวียนไซเบอร์</h3>
                 </div>
             </div>
             <div className="bg-[#2e3338] rounded-b-sm p-2">

@@ -15,3 +15,12 @@ export interface dashboardStatus {
     story: number;
     episodes: number;
 }
+
+export interface storys {
+    id: number;
+    title: string;
+    cover_image: string;
+    description: string;
+    category_id: string;
+    status: string;
+}

@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
+const Category = require("./categories");
 
 class Story extends Model {}
 
@@ -11,7 +12,7 @@ Story.init(
     category_id: { type: DataTypes.INTEGER, allowNull: false },
     user_id: { type: DataTypes.INTEGER, allowNull: false },
     status: {
-      type: DataTypes.ENUM("ongoing", "completed", "hiatus"),
+      type: DataTypes.ENUM("ongoing", "completed"),
       defaultValue: "ongoing",
       allowNull: false,
     },
@@ -24,5 +25,7 @@ Story.init(
     underscored: true,
   }
 );
+
+Story.belongsTo(Category, {foreignKey: "category_id", as: "category"})
 
 module.exports = Story;

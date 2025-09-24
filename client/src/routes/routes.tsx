@@ -96,7 +96,7 @@ const routes = createBrowserRouter([
         element: <Add_Story />
       },
       {
-        path: "storys/episode",
+        path: "storys/episode/:id",
         element: <StoryEpisode />
       }
     ]
