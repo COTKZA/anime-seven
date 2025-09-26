@@ -34,8 +34,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
                 </li>
 
                 {pages.map((page) => (
-                    <li>
+                    <li key={page}>
                         <button
+                        onClick={() => onPageChange(page)}
                             className={`px-3 sm:px-4 h-9 border border-[#3a3f44] ${currentPage === page
                                 ? "bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539] hover:bg-gray-700 text-white"
                                 : "text-white bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539] hover:bg-gray-700"

@@ -5,7 +5,6 @@ import { useEffect, useState, type FormEvent } from "react"
 import { toastError } from "../../../utils/toast"
 import { ToastContainer } from "react-toastify"
 import type { categorys } from "../../../types/interface"
-import Loading from "../../../components/layouts/admin/Loading"
 import { useAuth } from "../../../context/AuthProvider"
 
 const Add_Story = () => {
@@ -18,6 +17,7 @@ const Add_Story = () => {
     const [description, setDescription] = useState<string>("")
     const [categoryid, setCategoryId] = useState<number>()
     const [status, setStatus] = useState<string>("ongoing")
+    const [language, setLanguage] = useState<string>("thai_dub")
 
     const navigate = useNavigate()
 
@@ -56,6 +56,7 @@ const Add_Story = () => {
             formStory.append("categoryid", categoryid?.toString() || "")
             formStory.append("status", status.trim())
             formStory.append("userId", user.id.toString())
+            formStory.append("language", language.trim())
 
             const res = await axios.post(`${import.meta.env.VITE_API_URL}/create/story`, formStory, {
                 headers: { "Content-Type": "multipart/form-data" }
@@ -109,13 +110,21 @@ const Add_Story = () => {
                                 </div>
 
                                 <div className="mb-2">
+                                    <label htmlFor="language" className="text-white text-md">ประเภทเสียง</label>
+                                    <select value={language} onChange={(event) => setLanguage((event.target.value))} className="w-full p-2 mt-1 bg-gray-100 border border-gray-100 rounded-lg">
+                                        <option value="thai_dub">พากย์ไทย</option>
+                                        <option value="thai_sub">ซับไทย</option>
+                                    </select>
+                                </div>
+
+                                <div className="mb-2">
                                     <label htmlFor="description" className="text-white text-md">รายละเอียด</label>
                                     <textarea value={description} onChange={(event) => setDescription(event.target.value)} rows={4} className="w-full p-2 mt-1 bg-gray-100 border border-gray-100 rounded-lg" placeholder="รายละเอียด"></textarea>
                                 </div>
                                 <div className="mb-2">
                                     <label htmlFor="category_id" className="text-white text-md">หมวดหมู่</label>
                                     <select value={categoryid} onChange={(event) => setCategoryId(Number(event.target.value))} className="w-full p-2 mt-1 bg-gray-100 border border-gray-100 rounded-lg">
-                                        {loading ? <Loading /> : category.map((items) => (
+                                        {loading ? <option disabled></option> : category.map((items) => (
                                             <option key={items.id} value={items.id}>{items.name}</option>
                                         ))}
                                     </select>

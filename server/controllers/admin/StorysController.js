@@ -60,10 +60,10 @@ exports.selectCategory = async (req, res) => {
 
 exports.create_story = async (req, res) => {
   try {
-    const { title, description, categoryid, userId, status } = req.body;
+    const { title, description, categoryid, userId, status, language } = req.body;
     const file = req.file;
 
-    if (!title || !description || !categoryid || !userId || !status) {
+    if (!title || !description || !categoryid || !userId || !status || !language) {
       return res.status(404).json({ error: "required" });
     }
 
@@ -78,6 +78,7 @@ exports.create_story = async (req, res) => {
       category_id: Number(categoryid),
       user_id: Number(userId),
       status: status,
+      language: language,
     });
 
     res.status(201).json({ message: "Create Story success" });

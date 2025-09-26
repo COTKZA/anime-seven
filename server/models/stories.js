@@ -16,6 +16,11 @@ Story.init(
       defaultValue: "ongoing",
       allowNull: false,
     },
+    language: {
+      type: DataTypes.ENUM("thai_sub", "thai_dub"),
+      defaultValue: "thai_dub",
+      allowNull: false,
+    },
   },
   {
     sequelize,
@@ -26,6 +31,6 @@ Story.init(
   }
 );
 
-Story.belongsTo(Category, {foreignKey: "category_id", as: "category"})
+Story.belongsTo(Category, { foreignKey: "category_id", as: "category" });
 
 module.exports = Story;
