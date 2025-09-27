@@ -6,13 +6,13 @@ class Episodes extends Model {}
 Episodes.init(
   {
     story_id: { type: DataTypes.INTEGER, allowNull: false },
-    story_id: { type: DataTypes.INTEGER, allowNull: false },
+    episode_number: { type: DataTypes.INTEGER, allowNull: false },
   },
   {
     sequelize,
     modelName: "Episodes",
     tableName: "episodes",
-    timestamps: false,
+    timestamps: true,
     underscored: true,
   }
 );

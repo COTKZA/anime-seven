@@ -1,63 +1,65 @@
-const Pagination = () => {
+interface PaginationProps {
+    currentPage: number,
+    totalPages: number,
+    onPageChange: (page: number) => void,
+}
+
+const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
+
+    // if (totalPages <= 1) return null;
+
+    const handlePrev = () => {
+        if (currentPage > 1) onPageChange(currentPage - 1)
+    }
+
+    const handleNext = () => {
+        if (currentPage < totalPages) onPageChange(currentPage + 1)
+    }
+
+    const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
     return (
         <nav aria-label="Page navigation" className="w-full">
             <ul className="flex flex-wrap justify-center sm:justify-end items-center text-sm sm:text-base">
                 <li>
-                    <a
-                        href="#"
-                        className="flex items-center justify-center px-3 sm:px-4 h-9 border border-[#3a3f44] text-white bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539] rounded-s-lg"
+                    <button
+                        onClick={handlePrev}
+                        disabled={currentPage === 1}
+                        className={`px-3 sm:px-4 h-9 border border-[#3a3f44] rounded-l-lg ${currentPage === 1
+                            ? "text-gray-500 bg-[#2a2d30] cursor-not-allowed"
+                            : "text-white bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539] hover:bg-gray-700"
+                            }`}
                     >
                         ก่อนหน้า
-                    </a>
+                    </button>
                 </li>
+
+                {pages.map((page) => (
+                    <li key={page}>
+                        <button
+                        onClick={() => onPageChange(page)}
+                            className={`px-3 sm:px-4 h-9 border border-[#3a3f44] ${currentPage === page
+                                ? "bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539] hover:bg-gray-700 text-white"
+                                : "text-white bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539] hover:bg-gray-700"
+                                }`}
+                        >
+                            {page}
+                        </button>
+                    </li>
+                ))}
+
                 <li>
-                    <a
-                        href="#"
-                        className="flex items-center justify-center px-3 sm:px-4 h-9 border border-[#3a3f44] text-white bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539]"
-                    >
-                        1
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="#"
-                        className="flex items-center justify-center px-3 sm:px-4 h-9 border border-[#3a3f44] text-white bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539]"
-                    >
-                        2
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="#"
-                        className="flex items-center justify-center px-3 sm:px-4 h-9 border border-[#3a3f44] text-white bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539]"
-                    >
-                        3
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="#"
-                        className="flex items-center justify-center px-3 sm:px-4 h-9 border border-[#3a3f44] text-white bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539]"
-                    >
-                        4
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="#"
-                        className="flex items-center justify-center px-3 sm:px-4 h-9 border border-[#3a3f44] text-white bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539]"
-                    >
-                        5
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="#"
-                        className="flex items-center justify-center px-3 sm:px-4 h-9 border border-[#3a3f44] text-white bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539] rounded-e-lg"
+                    <button
+                        onClick={handleNext}
+                        disabled={currentPage === totalPages}
+                        className={`px-3 sm:px-4 h-9 border border-[#3a3f44] rounded-r-lg ${currentPage === totalPages
+                                ? "text-gray-500 bg-[#2a2d30] cursor-not-allowed"
+                                : "text-white bg-gradient-to-t from-[#484e55] via-[#3a3f44]/40 to-[#313539] hover:bg-gray-700"
+                            }`}
                     >
                         ถัดไป
-                    </a>
+                    </button>
                 </li>
+
             </ul>
         </nav>
     );

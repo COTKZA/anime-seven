@@ -45,7 +45,7 @@ const Categorys = () => {
     }
 
     useEffect(() => {
-        Categories(page);
+        Categories(page)
     }, [page, search])
 
     return (

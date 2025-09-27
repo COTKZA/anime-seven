@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const COOKIE_EXPIRES = 24 * 60 * 60 * 1000;
 
 // Register a new admin user
 exports.register = async (req, res) => {
@@ -69,15 +68,15 @@ exports.login = async (req, res) => {
         role: user.role,
       },
       JWT_SECRET,
-      { expiresIn: "24h" }
+      { expiresIn: "1h" }
     );
 
     // Set cookie
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: COOKIE_EXPIRES,
-      sameSite: 'strict'
+      maxAge: 1 * 60 * 60 * 1000, 
+      sameSite: "strict",
     });
 
     res.status(200).json({ message: "Login successful" });
@@ -91,6 +90,7 @@ exports.logout = (req, res) => {
   res.cookie("token", "", {
     httpOnly: true,
     expires: new Date(0),
+    sameSite: "strict",
   });
   res.json({ message: "Logged out successfully" });
 };
