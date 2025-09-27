@@ -15,7 +15,6 @@ if (!fs.existsSync(storyDir)) {
   fs.mkdirSync(storyDir, { recursive: true });
 }
 
-
 // CORS configuration for credentials
 const corsOptions = {
   origin: "http://localhost:5173",
@@ -29,10 +28,17 @@ app.use(cookieParser());
 app.use(cors(corsOptions));
 
 const routersPath = path.join(__dirname, "routes");
-fs.readdirSync(routersPath).forEach((file) => {
-  if (file.endsWith(".js")) {
-    const route = require(path.join(routersPath, file));
-    app.use(route);
+
+fs.readdirSync(routersPath).forEach((folder) => {
+  const folderPath = path.join(routersPath, folder);
+
+  if (fs.lstatSync(folderPath).isDirectory()) {
+    fs.readdirSync(folderPath).forEach((file) => {
+      if (file.endsWith(".js")) {
+        const route = require(path.join(folderPath, file));
+        app.use(`/${folder}`, route);
+      }
+    });
   }
 });
 

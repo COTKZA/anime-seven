@@ -12,7 +12,7 @@ Episodes.init(
     sequelize,
     modelName: "Episodes",
     tableName: "episodes",
-    timestamps: false,
+    timestamps: true,
     underscored: true,
   }
 );

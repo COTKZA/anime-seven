@@ -58,3 +58,11 @@ export interface selecttags {
   id: number;
   name: string;
 }
+
+export interface userstory {
+  id: number;
+  title: string;
+  cover_image: string;
+  status: string;
+  episodes_count: string;
+}

@@ -105,7 +105,7 @@ const StoryEpisode = () => {
                                         <p className="text-white text-md">แท็ก </p>
                                         <div className="flex items-center justify-center gap-1">
                                             {items.tags.map((tag, index) => (
-                                            <span key={index} className="rounded-full text-sm bg-white px-1 text-[#337ab7]">
+                                            <span key={index} className="rounded-full text-xs sm:text-sm bg-white px-1 text-[#337ab7]">
                                                 {tag.name}
                                             </span>
                                         ))}

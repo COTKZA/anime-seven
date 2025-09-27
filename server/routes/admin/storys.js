@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const StorysController = require("../controllers/admin/StorysController");
-const uploadStory = require("../middleware/upload");
+const StorysController = require("../../controllers/admin/StorysController");
+const uploadStory = require("../../middleware/upload");
 
 router.get("/storys", StorysController.index);
 router.get("/select/category", StorysController.selectCategory);
