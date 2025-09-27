@@ -14,18 +14,26 @@ import Register from "../pages/admin/auth/Register";
 // Admin Pages
 import Dashboard from "../pages/admin/Dashboard";
 import Accounts from "../pages/admin/Accounts";
+
 import Storys from "../pages/admin/Storys";
 import Add_Story from "../pages/admin/story/Add_Story";
+import StoryEpisode from "../pages/admin/StoryEpisode";
+import ShowStoryTags from "../pages/admin/story/ShowStoryTags";
+import Add_StoryTag from "../pages/admin/story/Add_StoryTag";
+
 import Categorys from "../pages/admin/Categorys";
 import Add_Categorys from "../pages/admin/categorys/Add_Categorys";
 import Edit_Categorys from "../pages/admin/categorys/Edit_Categorys";
 import Delete_Categorys from "../pages/admin/categorys/Delete_Categorys";
+
 import Tags from "../pages/admin/Tags";
 import Add_Tags from "../pages/admin/tags/Add_Tags";
 import Edit_Tags from "../pages/admin/tags/Edit_Tags";
 import Delete_Tags from "../pages/admin/tags/Delete_Tags";
+
 import StoryTags from "../pages/admin/StoryTags";
-import StoryEpisode from "../pages/admin/StoryEpisode";
+
+
 
 const routes = createBrowserRouter([
   // Public Routes
@@ -98,6 +106,14 @@ const routes = createBrowserRouter([
       {
         path: "storys/episode/:id",
         element: <StoryEpisode />
+      },
+      {
+        path: "storys/storytag/:id",
+        element: <ShowStoryTags />
+      },
+      {
+        path: "storys/storytag/add/:id",
+        element: <Add_StoryTag />
       }
     ]
   }

@@ -7,6 +7,7 @@ import { FaCaretDown } from "react-icons/fa"
 import { useState, useEffect } from "react"
 import { ToastContainer } from "react-toastify"
 import { toastError, toastSuccess } from "../../utils/toast"
+import { FaTag } from "react-icons/fa"
 import type { storys } from "../../types/interface"
 import axios from "axios"
 import Pagination from "../../components/layouts/admin/Pagination"
@@ -78,7 +79,7 @@ const Storys = () => {
       </div>
 
       <div className="bg-[#2e3338] p-2 rounded-b-sm">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-8 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-7 gap-3">
 
           {loading ? (
             <Loading />
@@ -95,6 +96,7 @@ const Storys = () => {
                   </div>
                 </NavLink>
                 <div className="flex items-center gap-2 mt-3">
+                  <NavLink to={`/admin/storys/storytag/${items.id}`} className={`p-2 bg-blue-500 hover:bg-blue-700 w-full rounded-md flex items-center justify-center`}><FaTag className="text-lg text-white" /></NavLink>
                   <NavLink to={``} className={`p-2 bg-yellow-500 hover:bg-yellow-700 w-full rounded-md flex items-center justify-center`} ><FaEdit className="text-lg text-white" /></NavLink>
                   <NavLink to={``} className={`p-2 bg-red-500 hover:bg-red-700  w-full rounded-md flex items-center justify-center`}><MdDelete className="text-lg text-white" /></NavLink>
                 </div>

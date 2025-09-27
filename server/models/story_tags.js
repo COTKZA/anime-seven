@@ -5,7 +5,7 @@ class StoryTag extends Model {}
 
 StoryTag.init(
   {
-    story_tags: { type: DataTypes.INTEGER, allowNull: false },
+    story_id: { type: DataTypes.INTEGER, allowNull: false },
     tag_id: { type: DataTypes.INTEGER, allowNull: false },
   },
   {

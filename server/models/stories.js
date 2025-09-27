@@ -1,6 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const Category = require("./categories");
+const Episodes = require("./episodes");
+const StoryTag = require("./story_tags");
+const Tag = require("./tags");
 
 class Story extends Model {}
 
@@ -32,5 +35,21 @@ Story.init(
 );
 
 Story.belongsTo(Category, { foreignKey: "category_id", as: "category" });
+Story.hasMany(Episodes, { foreignKey: "story_id", as: "episodes" });
+Episodes.belongsTo(Story, { foreignKey: "story_id", as: "story" });
+
+Story.belongsToMany(Tag, {
+  through: StoryTag,
+  foreignKey: "story_id",
+  otherKey: "tag_id",
+  as: "tags",
+});
+
+Tag.belongsToMany(Story, {
+  through: StoryTag,
+  foreignKey: "tag_id",
+  otherKey: "story_id",
+  as: "stories",
+});
 
 module.exports = Story;

@@ -37,7 +37,7 @@ exports.create_tag = async (req, res) => {
     const { name } = req.body;
 
     if (!name) {
-      return res.status(404).json({ error: "required" });
+      return res.status(400).json({ error: "required" });
     }
 
     await Tag.create({
@@ -58,7 +58,7 @@ exports.tagId = async (req, res) => {
     const tags = await Tag.findByPk(id);
 
     if (!tags) {
-      return res.status(400).json({ error: "Not Found" });
+      return res.status(404).json({ error: "Not Found" });
     }
 
     res
@@ -76,7 +76,7 @@ exports.update_tags = async (req, res) => {
     const { name } = req.body;
 
     if (!name) {
-      return res.status(404).json({ error: "required" });
+      return res.status(400).json({ error: "required" });
     }
 
     const tags = await Tag.findByPk(id);
@@ -103,7 +103,7 @@ exports.delete_tags = async (req, res) => {
     const deleted = await Tag.destroy({ where: { id } });
 
     if (!deleted) {
-      return res.status(400).json({ error: "Category not found" });
+      return res.status(404).json({ error: "Category not found" });
     }
 
     res.status(200).json({ message: "Tags Delete Successfully" });

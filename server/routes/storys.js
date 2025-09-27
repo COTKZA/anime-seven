@@ -11,5 +11,9 @@ router.post(
   StorysController.create_story
 );
 router.get("/story/:id", StorysController.storyId);
+router.get("/storytag/:id", StorysController.storyTagId);
+router.get("/select/tags", StorysController.selectTags);
+router.post("/create/storytag", StorysController.createStorytags)
+router.delete("/storytag/:id", StorysController.deleteStoryTag)
 
 module.exports = router;

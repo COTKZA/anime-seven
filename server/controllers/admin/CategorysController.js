@@ -58,7 +58,7 @@ exports.categoryId = async (req, res) => {
     const category = await Category.findByPk(id);
 
     if (!category) {
-      return res.status(400).json({ error: "Category not found" });
+      return res.status(404).json({ error: "Category not found" });
     }
 
     res
@@ -83,7 +83,7 @@ exports.update_category = async (req, res) => {
     const category = await Category.findByPk(id);
 
     if (!category) {
-      return res.status(400).json({ error: "Category not found" });
+      return res.status(404).json({ error: "Category not found" });
     }
 
     await category.update({
@@ -105,7 +105,7 @@ exports.delete_category = async (req, res) => {
     const deleted = await Category.destroy({ where: { id } });
 
     if (!deleted) {
-      return res.status(400).json({ error: "Category not found" });
+      return res.status(404).json({ error: "Category not found" });
     }
 
     res.status(200).json({ message: "Category Delete Successfully" });
